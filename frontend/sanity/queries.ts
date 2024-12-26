@@ -1,10 +1,13 @@
 import { Sanity } from './client'
 
-type Sleigh = {
+// TODO: Put this in a Types file
+export type Sleigh = {
   maintenanceHistory: []
   mileage: number
   model: string
   name: string
+  range: number
+  capacity: number
   _createdAt: string
   _id: string
   _rev: string
