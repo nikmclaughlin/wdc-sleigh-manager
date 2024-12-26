@@ -1,8 +1,6 @@
-import { useState } from 'react'
-
+import { getSleighs } from '../sanity/queries'
+const sleighs = await getSleighs()
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <i className="fa-brands fa-react text-6xl animate-spin"></i>
@@ -10,6 +8,9 @@ function App() {
       <p className="text-2xl">
         Click on the Vite and React logos to learn more
       </p>
+      {sleighs.map((sleigh) => {
+        return <p>{sleigh.name}</p>
+      })}
     </>
   )
 }
