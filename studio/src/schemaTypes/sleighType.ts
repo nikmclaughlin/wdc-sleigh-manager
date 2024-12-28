@@ -10,6 +10,7 @@ export const sleighType = defineType({
     defineField({name: 'name', type: 'string'}),
     defineField({name: 'model', type: 'string'}),
     defineField({name: 'capacity', type: 'number', title: 'Capacity (lbs)'}),
+    defineField({name: 'speed', type: 'number', title: 'Speed (mpm)'}),
     defineField({name: 'range', type: 'number', title: 'Maximum range (in miles)'}),
     defineField({name: 'mileage', type: 'number', title: 'Distance Flown (in miles)'}),
     defineField({

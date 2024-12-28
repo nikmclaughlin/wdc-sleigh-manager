@@ -7,6 +7,7 @@ export type Sleigh = {
   model: string
   name: string
   range: number
+  speed: number
   capacity: number
   _createdAt: string
   _id: string
@@ -15,9 +16,28 @@ export type Sleigh = {
   _updatedAt: string
 }
 
+export type Child = {
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: 'child'
+  _updatedAt: string
+  address: string
+  age: number
+  name: string
+  status: string
+  wishList: string[]
+}
+
 export async function getSleighs() {
   const sleighs: Sleigh[] = await Sanity.fetch('*[_type == "sleigh"]')
   return sleighs
+}
+
+export async function getRandomChild() {
+  const children: Child[] = await Sanity.fetch('*[_type== "child"]')
+  const randomIndex = Math.round(Math.random() * children.length + 1)
+  return children[randomIndex]
 }
 
 // export async function createPost(post: Post) {
