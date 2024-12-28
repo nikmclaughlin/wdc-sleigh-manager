@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { OrderCard } from './components/OrderCard'
 import { SleighCard } from './components/SleighCard'
 import { generateOrder } from './services/orders'
 import { initSleighs } from './services/sleighs'
@@ -25,12 +26,12 @@ function App() {
           className="p-4 bg-red-400 rounded hover:bg-red-500"
           onClick={async () => {
             setOrders([...orders, await generateOrder()])
-            console.info(orders)
+            // console.info(orders)
           }}
         >
           Order up
         </button>
-        {orders?.map((_order, idx) => <p key={idx}>{'Order ' + idx}</p>)}
+        {orders?.map((order, idx) => <OrderCard key={idx} order={order} />)}
       </main>
     </div>
   )
