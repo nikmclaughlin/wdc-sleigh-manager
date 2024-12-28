@@ -1,45 +1,12 @@
 import { useState } from 'react'
-import { getRandomChild, getSleighs } from '../sanity/queries'
 import { SleighCard } from './components/SleighCard'
+import { generateOrder } from './services/orders'
+import { initSleighs } from './services/sleighs'
 
-const SLEIGH_COUNT = 3
-const sleighdata = await getSleighs()
-const selectionIndex = Math.round(
-  Math.random() * (sleighdata.length - SLEIGH_COUNT)
-)
-const sleighs = sleighdata.slice(selectionIndex, selectionIndex + SLEIGH_COUNT)
-
-const MAX_ORDER_SIZE = 3000
-const MIN_ORDER_SIZE = 1000
-const MAX_ORDER_DISTANCE = 10000
-const MIN_ORDER_DISTANCE = 3000
-
-const generateOrder = async () => {
-  // Orders are generated with a size (1k - 3k lbs) and delivery distance (3k - 10k mi)
-  const newSize = Math.round(
-    Math.random() * (MAX_ORDER_SIZE - MIN_ORDER_SIZE) + MIN_ORDER_SIZE
-  )
-  const newDistance = Math.round(
-    Math.random() * (MAX_ORDER_DISTANCE - MIN_ORDER_DISTANCE) +
-      MIN_ORDER_DISTANCE
-  )
-
-  const orderChild = await getRandomChild()
-
-  const newDestination = orderChild.address.split(', ')[1]
-
-  const newOrder = {
-    destination: newDestination,
-    manifest: orderChild.wishList,
-    size: newSize,
-    distance: newDistance,
-  }
-
-  return newOrder
-}
+const firstOrder = await generateOrder()
+const sleighs = await initSleighs()
 
 function App() {
-  const firstOrder = generateOrder()
   const [orders, setOrders] = useState([firstOrder])
   return (
     <div className="h-screen">
@@ -56,8 +23,8 @@ function App() {
         </div>
         <button
           className="p-4 bg-red-400 rounded hover:bg-red-500"
-          onClick={() => {
-            setOrders([...orders, generateOrder()])
+          onClick={async () => {
+            setOrders([...orders, await generateOrder()])
             console.info(orders)
           }}
         >
