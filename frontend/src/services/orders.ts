@@ -31,7 +31,7 @@ export const generateOrder = async () => {
   const newOrder: OrderType = {
     _id: nanoid(),
     destination: newDestination || 'Portland',
-    manifest: orderChild.wishList || [],
+    manifest: orderChild.wishList || ['puppies', 'puppies', 'more puppies'],
     size: newSize,
     distance: newDistance,
   }

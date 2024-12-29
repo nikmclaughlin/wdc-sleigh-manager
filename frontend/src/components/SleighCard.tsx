@@ -14,15 +14,10 @@ export const SleighCard = (props: {
     Math.round((sleigh.deliveryDistance / sleigh.speed) * 60)
   )
 
-  //   let deliverySeconds = Math.round(
-  //     (sleigh.deliveryDistance / sleigh.speed) * 60
-  //   )
-
   useEffect(() => {
     if (isDispatched) {
       const sleighDispatchInterval = setInterval(() => {
         const remainingTime = deliverySeconds - 1
-        console.log(remainingTime)
 
         if (remainingTime < 0) {
           setIsDispatched(false)
@@ -73,7 +68,7 @@ export const SleighCard = (props: {
           <p>Capacity:</p>
           <p className="">{sleigh.capacity + ' lbs' || 'n/a'}</p>
         </div>
-        {sleigh.load > 0 && !isDispatched && (
+        {sleigh.load > 0 && (
           <>
             <div className="flex w-full items-center justify-between">
               <p>Load</p>
@@ -85,10 +80,14 @@ export const SleighCard = (props: {
             <div>
               {sleigh.load} / {sleigh.capacity}
             </div>
-            <div className="flex justify-between w-full">
-              <p>Time to deliver:</p>
-              <p className="">{deliverySeconds + ' sec' || 'n/a'}</p>
-            </div>
+            {isDispatched ? (
+              <div className="h-6"></div>
+            ) : (
+              <div className="flex justify-between w-full">
+                <p>Time to deliver:</p>
+                <p className="">{deliverySeconds + ' sec' || 'n/a'}</p>
+              </div>
+            )}
             <button
               className="p-2 w-full bg-green-200 text-green-700 font-bold rounded-full"
               onClick={() => {
@@ -96,6 +95,7 @@ export const SleighCard = (props: {
                   setIsDispatched(true)
                 }
               }}
+              disabled={isDispatched}
             >
               Dispatch
             </button>
