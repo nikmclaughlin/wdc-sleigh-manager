@@ -31,7 +31,9 @@ function App() {
         >
           Order up
         </button>
-        {orders?.map((order, idx) => <OrderCard key={idx} order={order} />)}
+        <div className="flex p-4 gap-4 w-full justify-evenly border-2">
+          {orders?.map((order, idx) => <OrderCard key={idx} order={order} />)}
+        </div>
       </main>
     </div>
   )

@@ -1,6 +1,7 @@
 import { getRandomChild } from '../../sanity/queries'
 
 export type OrderType = {
+  //   _id: number
   destination: string
   manifest: string[]
   size: number
@@ -27,6 +28,7 @@ export const generateOrder = async () => {
   const newDestination = orderChild.address.split(', ')[1]
 
   const newOrder: OrderType = {
+    // _id: ,
     destination: newDestination,
     manifest: orderChild.wishList,
     size: newSize,
