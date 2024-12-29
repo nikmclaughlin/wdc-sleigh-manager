@@ -1,11 +1,17 @@
-import { getSleighs } from '../../sanity/queries'
+import { getSleighs, SanitySleigh } from '../../sanity/queries'
+
+export type SleighType = SanitySleigh & {
+  load: number
+  deliveryDistance: number
+}
 
 const SLEIGH_COUNT = 3
 
 export const initSleighs = async () => {
-  const allSleighs = (await getSleighs()).map((sleigh) => ({
+  const allSleighs: SleighType[] = (await getSleighs()).map((sleigh) => ({
     ...sleigh,
     load: 0,
+    deliveryDistance: 0,
   }))
   const selectionIndex = Math.round(
     Math.random() * (allSleighs.length - SLEIGH_COUNT)

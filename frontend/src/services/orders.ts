@@ -1,7 +1,8 @@
+import { nanoid } from 'nanoid'
 import { getRandomChild } from '../../sanity/queries'
 
 export type OrderType = {
-  //   _id: number
+  _id: string
   destination: string
   manifest: string[]
   size: number
@@ -25,12 +26,12 @@ export const generateOrder = async () => {
 
   const orderChild = await getRandomChild()
 
-  const newDestination = orderChild.address.split(', ')[1]
+  const newDestination = orderChild?.address.split(', ')[1]
 
   const newOrder: OrderType = {
-    // _id: ,
-    destination: newDestination,
-    manifest: orderChild.wishList,
+    _id: nanoid(),
+    destination: newDestination || 'Portland',
+    manifest: orderChild.wishList || [],
     size: newSize,
     distance: newDistance,
   }

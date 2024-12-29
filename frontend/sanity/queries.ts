@@ -1,7 +1,7 @@
 import { Sanity } from './client'
 
 // TODO: Put this in a Types file
-export type Sleigh = {
+export type SanitySleigh = {
   maintenanceHistory: []
   mileage: number
   model: string
@@ -30,7 +30,7 @@ export type Child = {
 }
 
 export async function getSleighs() {
-  const sleighs: Sleigh[] = await Sanity.fetch('*[_type == "sleigh"]')
+  const sleighs: SanitySleigh[] = await Sanity.fetch('*[_type == "sleigh"]')
   return sleighs
 }
 

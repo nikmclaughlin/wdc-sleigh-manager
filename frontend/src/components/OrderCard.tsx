@@ -1,9 +1,29 @@
+import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 import { OrderType } from '../services/orders'
 
-export const OrderCard = (props: { order: OrderType }) => {
+export const OrderCard = (props: {
+  order: OrderType
+  onSelected: (id: string, selected: boolean) => void
+}) => {
   const order = props.order
+  const onSelected = props.onSelected
+  const [isSelected, setIsSelected] = useState(false)
+
+  useEffect(() => {
+    onSelected(order._id, isSelected)
+  }, [isSelected, onSelected, order._id])
+
   return (
-    <div className="flex flex-col w-48 items-center p-4 bg-red-400/80 rounded-lg border-2 border-red-700 hover:scale-105">
+    <div
+      className={clsx(
+        'flex flex-col w-48 items-center p-4 bg-red-400/80 rounded-lg border-2 border-red-700 hover:scale-105',
+        isSelected && 'border-red-500/80 bg-red-500/80 scale-105'
+      )}
+      onClick={() => {
+        setIsSelected(!isSelected)
+      }}
+    >
       <div className="text-xl">
         Delivery to <br /> {order.destination}
       </div>
