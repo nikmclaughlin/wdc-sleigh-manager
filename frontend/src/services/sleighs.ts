@@ -3,9 +3,18 @@ import { getSleighs } from '../../sanity/queries'
 const SLEIGH_COUNT = 3
 
 export const initSleighs = async () => {
-  const sleighs = await getSleighs()
+  const allSleighs = (await getSleighs()).map((sleigh) => ({
+    ...sleigh,
+    load: 0,
+  }))
   const selectionIndex = Math.round(
-    Math.random() * (sleighs.length - SLEIGH_COUNT)
+    Math.random() * (allSleighs.length - SLEIGH_COUNT)
   )
-  return sleighs.slice(selectionIndex, selectionIndex + SLEIGH_COUNT)
+
+  const sleighs = allSleighs.slice(
+    selectionIndex,
+    selectionIndex + SLEIGH_COUNT
+  )
+
+  return sleighs
 }

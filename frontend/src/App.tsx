@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { CountdownCard } from './components/CountdownCard'
 import { OrderCard } from './components/OrderCard'
 import { SleighCard } from './components/SleighCard'
 import { generateOrder } from './services/orders'
@@ -9,6 +10,26 @@ const sleighs = await initSleighs()
 
 function App() {
   const [orders, setOrders] = useState([firstOrder])
+  const [nextOrderTime, setNextOrderTime] = useState(10)
+
+  useEffect(() => {
+    const countdownInterval = setInterval(async () => {
+      let remainingTime = nextOrderTime - 1
+
+      if (remainingTime < 0) {
+        if (orders.length <= 4) {
+          setOrders([...orders, await generateOrder()])
+        }
+        remainingTime = 10
+        clearInterval(countdownInterval)
+      }
+
+      setNextOrderTime(remainingTime)
+    }, 1000)
+
+    return () => clearInterval(countdownInterval)
+  }, [nextOrderTime, orders])
+
   return (
     <div className="h-screen">
       <div className="flex items-center w-full bg-green-600">
@@ -31,8 +52,9 @@ function App() {
         >
           Order up
         </button>
-        <div className="flex p-4 gap-4 w-full justify-evenly border-2">
+        <div className="flex p-4 gap-4 w-full justify-center">
           {orders?.map((order, idx) => <OrderCard key={idx} order={order} />)}
+          <CountdownCard time={nextOrderTime} />
         </div>
       </main>
     </div>
