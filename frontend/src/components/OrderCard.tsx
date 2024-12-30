@@ -24,8 +24,16 @@ export const OrderCard = (props: {
         setIsSelected(!isSelected)
       }}
     >
-      <div className="text-xl">
-        Delivery to <br /> {order.destination}
+      <div
+        className={clsx(
+          'flex items-center gap-2 w-full justify-evenly',
+          isSelected ? 'text-red-100' : 'text-red-950'
+        )}
+      >
+        <i className="fa-solid fa-box text-3xl"></i>
+        <p className="text-xl">
+          Delivery to <br /> {order.destination}
+        </p>
       </div>
       <div className="flex justify-between w-full">
         <p>Size:</p>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 // import { Sleigh } from '../sanity/queries'
 import { CountdownCard } from './components/CountdownCard'
+import { InfoModal } from './components/InfoModal'
 import { OrderCard } from './components/OrderCard'
 import { SleighCard } from './components/SleighCard'
 import { generateOrder, OrderType } from './services/orders'
@@ -16,6 +17,7 @@ function App() {
   const [nextOrderTime, setNextOrderTime] = useState(10)
   const [selectedOrderIds, setSelectedOrderIds] = useState<string[]>([])
   const [errorMessage, setErrorMessage] = useState('')
+  const [isInfoShowing, setIsInfoShowing] = useState(true)
 
   useEffect(() => {
     const countdownInterval = setInterval(async () => {
@@ -109,9 +111,15 @@ function App() {
 
   return (
     <div className="h-screen">
-      <div className="flex items-center w-full bg-green-600">
-        <i className="fa-solid fa-sleigh text-6xl text-red-500 p-6"></i>
-        <h1 className="text-5xl font-serif text-green-200">Sleigh Manager</h1>
+      <InfoModal display={isInfoShowing} closing={setIsInfoShowing} />
+      <div className="flex items-center justify-between w-full px-4 bg-green-600">
+        <div className="flex items-center">
+          <i className="fa-solid fa-sleigh text-6xl text-red-500 p-6"></i>
+          <h1 className="text-5xl font-serif text-green-200">Sleigh Manager</h1>
+        </div>
+        <button className="px-4" onClick={() => setIsInfoShowing(true)}>
+          <i className="fa-regular fa-circle-question text-2xl text-green-100"></i>
+        </button>
       </div>
       <main className="w-full h-full p-4 flex flex-col items-center bg-green-300">
         <h2 className="text-3xl">Santa's Sleighs</h2>
@@ -132,7 +140,7 @@ function App() {
           <div className="h-8"></div>
         )}
         <h2 className="text-2xl">Delivery Orders</h2>
-        <div className="flex p-4 gap-4 w-full justify-center">
+        <div className="flex p-4 gap-4 w-full justify-center flex-wrap">
           {orders?.map((order) => (
             <OrderCard key={order._id} order={order} onSelected={toggleOrder} />
           ))}
