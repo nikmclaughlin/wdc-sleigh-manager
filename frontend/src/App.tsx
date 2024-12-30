@@ -88,7 +88,11 @@ function App() {
         try {
           assignSleighOrders(ordersToAssign, sleighToAssign)
         } catch (error) {
-          setErrorMessage(error.message)
+          if (error instanceof Error) {
+            setErrorMessage(error.message)
+          } else {
+            console.log({ error })
+          }
           return
         }
 
