@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { SleighType } from '../services/sleighs'
 
@@ -45,10 +44,7 @@ export const SleighCard = (props: {
   return (
     <div className="relative w-64">
       <div
-        className={clsx(
-          'relative flex flex-col w-64 p-4 border-2 border-green-700 rounded-lg items-center bg-green-600 hover:bg-green-600/80 text-green-100',
-          isDispatched && 'animate-pulse'
-        )}
+        className="relative flex flex-col w-64 p-4 border-2 border-green-700 rounded-lg items-center bg-green-600 hover:bg-green-600/80 text-green-100"
         onClick={() => {
           if (!isDispatched) {
             onSelected(sleigh._id)

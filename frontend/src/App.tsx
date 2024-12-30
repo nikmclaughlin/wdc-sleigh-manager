@@ -27,7 +27,7 @@ function App() {
         if (orders.length < MAX_ORDER_COUNT) {
           setOrders([...orders, await generateOrder()])
         }
-        remainingTime = 10
+        remainingTime = 7
         clearInterval(countdownInterval)
       }
 
