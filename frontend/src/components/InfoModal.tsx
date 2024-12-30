@@ -30,12 +30,21 @@ export const InfoModal = (props: {
       </p>
       <h2 className="text-2xl font-semibold px-4">How to play</h2>
       <p className="px-4">
-        Click <span className="text-red-400 font-semibold">orders</span> to
-        select them as they come in and then click on a{' '}
-        <span className="text-green-600 font-semibold">sleigh</span> to assign
-        the order(s). Once a sleigh is loaded, you can click it's{' '}
-        <span className="font-bold">dispatch</span> button to send it off on the
-        delivery. <br /> <br />
+        Click on{' '}
+        <span className="text-red-400 font-semibold">
+          {' '}
+          <i className="fa-solid fa-box" /> Orders
+        </span>{' '}
+        to select them as they come in and then click on a{' '}
+        <span className="text-green-600 font-semibold">
+          <i className="fa-solid fa-sleigh" /> Sleigh
+        </span>{' '}
+        to assign and load the order(s). Once a sleigh is loaded, you can click
+        it's{' '}
+        <span className="font-bold">
+          <i className="fa-regular fa-paper-plane"></i> Dispatch
+        </span>{' '}
+        button to send it off on the delivery. <br /> <br />
         Each sleigh has it's own carrying capacity and flight speed - assign
         orders carefully to optimize delivery efficiency!
       </p>

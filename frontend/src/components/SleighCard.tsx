@@ -89,7 +89,7 @@ export const SleighCard = (props: {
               </div>
             )}
             <button
-              className="p-2 w-full bg-green-200 text-green-700 font-bold rounded-full"
+              className="p-2 w-full bg-green-200 text-green-700 font-bold rounded-full flex gap-2 items-center justify-center"
               onClick={() => {
                 if (!isDispatched) {
                   setIsDispatched(true)
@@ -97,7 +97,8 @@ export const SleighCard = (props: {
               }}
               disabled={isDispatched}
             >
-              Dispatch
+              <i className="fa-regular fa-paper-plane"></i>
+              <p>Dispatch</p>
             </button>
           </>
         )}
