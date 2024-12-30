@@ -8,6 +8,10 @@ export const SleighCard = (props: {
   const sleigh = props.sleigh
   const onSelected = props.onSelected
 
+  const stringSpeed = sleigh.speed.toString()
+  const formattedSpeed =
+    stringSpeed.slice(0, 2) + '.' + stringSpeed.slice(2, 3) + 'k'
+
   const [isDispatched, setIsDispatched] = useState(false)
   const [deliverySeconds, setDeliverySeconds] = useState(
     Math.round((sleigh.deliveryDistance / sleigh.speed) * 60)
@@ -58,7 +62,7 @@ export const SleighCard = (props: {
         </div>
         <div className="flex justify-between w-full">
           <p>Speed:</p>
-          <p className="">{sleigh.speed + ' mi/min' || 'n/a'}</p>
+          <p className="">{formattedSpeed + ' mi/min' || 'n/a'}</p>
         </div>
         <div className="flex justify-between w-full">
           <p>Capacity:</p>

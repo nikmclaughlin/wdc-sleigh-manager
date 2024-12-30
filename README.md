@@ -24,6 +24,7 @@ Each sleigh has it's own carrying capacity and flight speed - assign orders care
 
 ## TODO
 This was built as a ~4-hr hackathon project, with more time I'd like to
+- [ ] Improve dashboard visuals for easier decision-making
 - [ ] Fine-tune order generation to come in batches
 - [ ] Give points for completed orders
 - [ ] Allow players to use points to unlock new sleighs, upgrades, etc.
